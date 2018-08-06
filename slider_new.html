@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+
+<div class="global">
+<div class="slidecontainer">
+	<button id="stop" class="btnstop" value="lance">Arrêter</button>
+	<button id="lance" class="btnlaunch" value="lance">Lancer l'animation</button>
+	<button id="prev" class="btn" value="prev"><<</button>
+	<div id="dateJour">7 juillet 2018</div>
+	<button id="next" class="btn" value="next">>></button>
+</div>
+
+<div id="game_app" style="display: flex; justify-content:center;">
+	<img style="margin-top:16px;width:100%;max-width:750px;height:85vw;max-height:669px;" src="https://cdn.rawgit.com/nicolasenault/ozone/393ab2255b3830381fdb6c93878b38a77a3c9f2f/1_6.png" id="myImg" />
+</div>
+	<input type="range" min="1" max="31" value="1" class="slider" id="myRange">
+</div>
+
+</body>
+</html>
+
+<style>
+
+.slidecontainer {
+text-align: center;
+}
+#dateJour{
+	display: inline-block;
+	font-family: 'Roboto';
+	margin-left:10px;
+	margin-right:10px;
+	font-size: 22px;
+}
+
+.btn{
+    color: #000;
+    background-color: #fff;
+    display: inline-block;
+    margin-bottom: 0;
+    font-size: 18px;
+	font-family: 'Roboto';
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 0px solid transparent;
+    border-radius: 4px;
+}
+
+.btnlaunch{
+    color: #fff;
+    background-color: #eb501e;
+    display: inline-block;
+    margin-bottom: 0;
+    margin-right: 20px;
+    font-size: 18px;
+	padding: 8px;
+	font-family: 'Roboto';
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 0px solid transparent;
+    border-radius: 4px;
+}
+
+.btnstop{
+    color: #fff;
+    background-color: #000;
+    display: inline-block;
+    margin-bottom: 0;
+    font-size: 18px;
+	padding: 8px;
+	font-family: 'Roboto';
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 0px solid transparent;
+    border-radius: 4px;
+}
+
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 20px;
+    border-radius: 5px;   
+    background: #b9bebe;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+	margin-bottom:15px;
+	margin-top:15px;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%; 
+    background: #41505f;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #41505f;
+    cursor: pointer;
+}
+</style>
+
+<script>
+	
+	var data = {
+		1: {jour:"7 juillet 2018" , img:"https://www.francetvinfo.fr/skin/projects/img/ozone/7_7.png" }, 
+		2: {jour:"8 juillet 2018" , img:"https://www.francetvinfo.fr/skin/projects/img/ozone/8_7.png" }, 
+		3: {jour:"9 juillet 2018" , img:"https://www.francetvinfo.fr/skin/projects/img/ozone/9_7.png" }, 
+		4: {jour:"10 juillet 2018" , img:"https://www.francetvinfo.fr/skin/projects/img/ozone/10_7.png" }, 
+		5: {jour:"11 juillet 2018" , img:"https://www.francetvinfo.fr/skin/projects/img/ozone/11_7.png" }, 
+		6: {jour:"12 juillet 2018" , img:"https://www.francetvinfo.fr/skin/projects/img/ozone/12_7.png" }, 
+		7: {jour:"13 juillet 2018" , img:"https://www.francetvinfo.fr/skin/projects/img/ozone/13_7.png" }, 
+		8: {jour:"14 juillet 2018" , img:"https://www.francetvinfo.fr/skin/projects/img/ozone/14_7.png" }, 
+		9: {jour:"15 juillet 2018" , img:"https://www.francetvinfo.fr/skin/projects/img/ozone/15_7.png" }, 
+		10: {jour:"16 juillet 2018" , img:"https://www.francetvinfo.fr/skin/projects/img/ozone/16_7.png" }, 
+		11: {jour:"17 juillet 2018" , img:"https://www.francetvinfo.fr/skin/projects/img/ozone/17_7.png" }, 
+		12: {jour:"18 juillet 2018" , img:"https://www.francetvinfo.fr/skin/projects/img/ozone/18_7.png" }, 
+		13: {jour:"19 juillet 2018" , img:"https://www.francetvinfo.fr/skin/projects/img/ozone/19_7.png" }, 
+		14: {jour:"20 juillet 2018" , img:"https://www.francetvinfo.fr/skin/projects/img/ozone/20_7.png" }, 
+		15: {jour:"21 juillet 2018" , img:"https://www.francetvinfo.fr/skin/projects/img/ozone/21_7.png" }, 
+		16: {jour:"22 juillet 2018" , img:"https://www.francetvinfo.fr/skin/projects/img/ozone/22_7.png" }, 
+		17: {jour:"23 juillet 2018" , img:"https://www.francetvinfo.fr/skin/projects/img/ozone/23_7.png" }, 
+		18: {jour:"24 juillet 2018" , img:"https://www.francetvinfo.fr/skin/projects/img/ozone/24_7.png" }, 
+		19: {jour:"25 juillet 2018" , img:"https://www.francetvinfo.fr/skin/projects/img/ozone/25_7.png" }, 
+		20: {jour:"26 juillet 2018" , img:"https://www.francetvinfo.fr/skin/projects/img/ozone/26_7.png" }, 
+		21: {jour:"27 juillet 2018" , img:"https://www.francetvinfo.fr/skin/projects/img/ozone/27_7.png" }, 
+		22: {jour:"28 juillet 2018" , img:"https://www.francetvinfo.fr/skin/projects/img/ozone/28_7.png" }, 
+		23: {jour:"29 juillet 2018" , img:"https://www.francetvinfo.fr/skin/projects/img/ozone/29_7.png" }, 
+		24: {jour:"30 juillet 2018" , img:"https://www.francetvinfo.fr/skin/projects/img/ozone/30_7.png" }, 
+		25: {jour:"31 juillet 2018" , img:"https://www.francetvinfo.fr/skin/projects/img/ozone/31_7.png" }, 
+		26: {jour:"1er août 2018" , img:"https://www.francetvinfo.fr/skin/projects/img/ozone/1_8.png" }, 
+		27: {jour:"2 août 2018" , img:"https://www.francetvinfo.fr/skin/projects/img/ozone/2_8.png" }, 
+		28: {jour:"3 août 2018" , img:"https://www.francetvinfo.fr/skin/projects/img/ozone/3_8.png" }, 
+		29: {jour:"4 août 2018" , img:"https://www.francetvinfo.fr/skin/projects/img/ozone/4_8.png" }, 
+		30: {jour:"5 août 2018" , img:"https://www.francetvinfo.fr/skin/projects/img/ozone/5_8.png" }, 
+		31: {jour:"6 août 2018" , img:"https://www.francetvinfo.fr/skin/projects/img/ozone/6_8.png" }, 
+	};
+	var MIN = 1;
+	var MAX = 31;
+	var rangeSlider = document.getElementById('myRange');
+	var counter = null;
+	
+	rangeSlider.addEventListener('change', rangeChange);
+	
+	document.getElementById('prev').addEventListener('click', prevAction);
+	document.getElementById('next').addEventListener('click', nextAction);
+	document.getElementById('lance').addEventListener('click', btnPlayAction);
+	document.getElementById('stop').addEventListener('click', btnStopAction);
+	
+	function nextAction() {
+		if (rangeSlider.value >= MAX) {
+			rangeSlider.value = MIN;
+		} else {
+			rangeSlider.value++;
+		}
+		rangeChange();
+	}
+	
+	function prevAction() {
+		if (rangeSlider.value <= MIN) {
+			rangeSlider.value = MAX;
+		} else {
+			rangeSlider.value--;
+		}
+		rangeChange();
+	}
+	
+	function rangeChange(e) {
+		document.getElementById('myImg').src = data[rangeSlider.value].img;
+		document.getElementById('dateJour').innerHTML = data[rangeSlider.value].jour;
+	};
+	
+	function btnPlayAction() {
+		counter = setInterval(function() {
+			if (rangeSlider.value < MAX) {
+				nextAction();
+			} else {
+				clearInterval(counter);
+			}
+			
+		}, 1000);
+	}
+	
+	function btnStopAction() {
+		 clearInterval(counter);
+	}
+
+	</script>
+
